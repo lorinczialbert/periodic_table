@@ -132,5 +132,3 @@ lib/
 MIT — free to use and modify.
 
 ---
-
-*Built with Flutter + Claude AI*
