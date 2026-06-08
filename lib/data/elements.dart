@@ -1,0 +1,1326 @@
+import '../models/element.dart';
+
+// All 118 elements with real scientific data.
+// tableRow / tableCol describe position in the visual grid (18 cols × 10 rows).
+//   Rows 1-7  → main table
+//   Row  8    → spacer
+//   Row  9    → lanthanide block
+//   Row  10   → actinide block
+// Placeholders at (6,3) and (7,3) are not in this list — drawn by the grid widget.
+
+const List<ChemElement> allElements = [
+  // ── Period 1 ─────────────────────────────────────────────────────────────────
+  ChemElement(
+    atomicNumber: 1, symbol: 'H', name: 'Hydrogen', atomicMass: '1.008',
+    category: ElementCategory.reactiveNonmetal, period: 1, group: 1,
+    tableRow: 1, tableCol: 1, block: 's',
+    electronConfig: '1s¹', electronegativity: 2.20,
+    meltingPoint: -259.16, boilingPoint: -252.88, density: 0.0000899,
+    oxidationStates: [-1, 1], discoveredBy: 'Henry Cavendish',
+    discoveryYear: '1766', phase: 'Gas',
+    summary: 'The lightest and most abundant element in the universe. '
+        'Essential component of water and all organic compounds.',
+  ),
+  ChemElement(
+    atomicNumber: 2, symbol: 'He', name: 'Helium', atomicMass: '4.003',
+    category: ElementCategory.nobleGas, period: 1, group: 18,
+    tableRow: 1, tableCol: 18, block: 's',
+    electronConfig: '1s²', electronegativity: null,
+    meltingPoint: -272.20, boilingPoint: -268.93, density: 0.000179,
+    oxidationStates: [0], discoveredBy: 'Pierre Janssen & Norman Lockyer',
+    discoveryYear: '1868', phase: 'Gas',
+    summary: 'Second most abundant element in the universe. '
+        'Used in cryogenics, MRI machines, and as a lifting gas.',
+  ),
+
+  // ── Period 2 ─────────────────────────────────────────────────────────────────
+  ChemElement(
+    atomicNumber: 3, symbol: 'Li', name: 'Lithium', atomicMass: '6.941',
+    category: ElementCategory.alkaliMetal, period: 2, group: 1,
+    tableRow: 2, tableCol: 1, block: 's',
+    electronConfig: '[He] 2s¹', electronegativity: 0.98,
+    meltingPoint: 180.5, boilingPoint: 1342, density: 0.534,
+    oxidationStates: [1], discoveredBy: 'Johan August Arfwedson',
+    discoveryYear: '1817', phase: 'Solid',
+    summary: 'Lightest metal and solid element. Critical in rechargeable '
+        'batteries, psychiatric medicine, and lightweight alloys.',
+  ),
+  ChemElement(
+    atomicNumber: 4, symbol: 'Be', name: 'Beryllium', atomicMass: '9.012',
+    category: ElementCategory.alkalineEarthMetal, period: 2, group: 2,
+    tableRow: 2, tableCol: 2, block: 's',
+    electronConfig: '[He] 2s²', electronegativity: 1.57,
+    meltingPoint: 1287, boilingPoint: 2469, density: 1.85,
+    oxidationStates: [2], discoveredBy: 'Louis Nicolas Vauquelin',
+    discoveryYear: '1798', phase: 'Solid',
+    summary: 'Extremely light, stiff, and thermally stable metal. '
+        'Used in aerospace, nuclear reactors, and X-ray windows.',
+  ),
+  ChemElement(
+    atomicNumber: 5, symbol: 'B', name: 'Boron', atomicMass: '10.811',
+    category: ElementCategory.metalloid, period: 2, group: 13,
+    tableRow: 2, tableCol: 13, block: 'p',
+    electronConfig: '[He] 2s² 2p¹', electronegativity: 2.04,
+    meltingPoint: 2076, boilingPoint: 3927, density: 2.34,
+    oxidationStates: [3], discoveredBy: 'Gay-Lussac & Louis Jacques Thénard',
+    discoveryYear: '1808', phase: 'Solid',
+    summary: 'Hard metalloid with unique covalent chemistry. '
+        'Essential in glass, ceramics, and semiconductor doping.',
+  ),
+  ChemElement(
+    atomicNumber: 6, symbol: 'C', name: 'Carbon', atomicMass: '12.011',
+    category: ElementCategory.reactiveNonmetal, period: 2, group: 14,
+    tableRow: 2, tableCol: 14, block: 'p',
+    electronConfig: '[He] 2s² 2p²', electronegativity: 2.55,
+    meltingPoint: 3550, boilingPoint: 4827, density: 2.267,
+    oxidationStates: [-4, -2, 2, 4], discoveredBy: 'Ancient',
+    discoveryYear: 'Prehistoric', phase: 'Solid',
+    summary: 'Basis of all known life. Exists as diamond, graphite, fullerene, '
+        'and graphene — each with radically different properties.',
+  ),
+  ChemElement(
+    atomicNumber: 7, symbol: 'N', name: 'Nitrogen', atomicMass: '14.007',
+    category: ElementCategory.reactiveNonmetal, period: 2, group: 15,
+    tableRow: 2, tableCol: 15, block: 'p',
+    electronConfig: '[He] 2s² 2p³', electronegativity: 3.04,
+    meltingPoint: -210.00, boilingPoint: -195.79, density: 0.001251,
+    oxidationStates: [-3, 3, 5], discoveredBy: 'Daniel Rutherford',
+    discoveryYear: '1772', phase: 'Gas',
+    summary: 'Makes up 78% of Earth\'s atmosphere. Essential for amino acids, '
+        'proteins, and DNA. Used as an inert atmosphere in labs.',
+  ),
+  ChemElement(
+    atomicNumber: 8, symbol: 'O', name: 'Oxygen', atomicMass: '15.999',
+    category: ElementCategory.reactiveNonmetal, period: 2, group: 16,
+    tableRow: 2, tableCol: 16, block: 'p',
+    electronConfig: '[He] 2s² 2p⁴', electronegativity: 3.44,
+    meltingPoint: -218.79, boilingPoint: -182.96, density: 0.001429,
+    oxidationStates: [-2, -1], discoveredBy: 'Carl Wilhelm Scheele',
+    discoveryYear: '1771', phase: 'Gas',
+    summary: 'Third most abundant element in the universe. Essential for '
+        'respiration and combustion. Highly reactive oxidising agent.',
+  ),
+  ChemElement(
+    atomicNumber: 9, symbol: 'F', name: 'Fluorine', atomicMass: '18.998',
+    category: ElementCategory.halogen, period: 2, group: 17,
+    tableRow: 2, tableCol: 17, block: 'p',
+    electronConfig: '[He] 2s² 2p⁵', electronegativity: 3.98,
+    meltingPoint: -219.67, boilingPoint: -188.11, density: 0.001696,
+    oxidationStates: [-1], discoveredBy: 'Henri Moissan',
+    discoveryYear: '1886', phase: 'Gas',
+    summary: 'Most electronegative element. Extremely reactive; corrodes '
+        'most materials. Used in Teflon, toothpaste, and pharmaceuticals.',
+  ),
+  ChemElement(
+    atomicNumber: 10, symbol: 'Ne', name: 'Neon', atomicMass: '20.180',
+    category: ElementCategory.nobleGas, period: 2, group: 18,
+    tableRow: 2, tableCol: 18, block: 'p',
+    electronConfig: '[He] 2s² 2p⁶', electronegativity: null,
+    meltingPoint: -248.59, boilingPoint: -246.05, density: 0.000900,
+    oxidationStates: [0], discoveredBy: 'William Ramsay & Morris Travers',
+    discoveryYear: '1898', phase: 'Gas',
+    summary: 'Inert noble gas giving the characteristic red-orange glow '
+        'in neon signs. Fifth most abundant element in the universe.',
+  ),
+
+  // ── Period 3 ─────────────────────────────────────────────────────────────────
+  ChemElement(
+    atomicNumber: 11, symbol: 'Na', name: 'Sodium', atomicMass: '22.990',
+    category: ElementCategory.alkaliMetal, period: 3, group: 1,
+    tableRow: 3, tableCol: 1, block: 's',
+    electronConfig: '[Ne] 3s¹', electronegativity: 0.93,
+    meltingPoint: 97.79, boilingPoint: 882.9, density: 0.968,
+    oxidationStates: [1], discoveredBy: 'Humphry Davy',
+    discoveryYear: '1807', phase: 'Solid',
+    summary: 'Soft, silvery-white alkali metal that reacts vigorously with '
+        'water. Essential electrolyte; vital role in nerve impulses.',
+  ),
+  ChemElement(
+    atomicNumber: 12, symbol: 'Mg', name: 'Magnesium', atomicMass: '24.305',
+    category: ElementCategory.alkalineEarthMetal, period: 3, group: 2,
+    tableRow: 3, tableCol: 2, block: 's',
+    electronConfig: '[Ne] 3s²', electronegativity: 1.31,
+    meltingPoint: 650.0, boilingPoint: 1090, density: 1.738,
+    oxidationStates: [2], discoveredBy: 'Joseph Black',
+    discoveryYear: '1755', phase: 'Solid',
+    summary: 'Lightest structural metal. Central atom of chlorophyll; '
+        'critical in photosynthesis and over 300 enzymatic reactions.',
+  ),
+  ChemElement(
+    atomicNumber: 13, symbol: 'Al', name: 'Aluminium', atomicMass: '26.982',
+    category: ElementCategory.postTransitionMetal, period: 3, group: 13,
+    tableRow: 3, tableCol: 13, block: 'p',
+    electronConfig: '[Ne] 3s² 3p¹', electronegativity: 1.61,
+    meltingPoint: 660.32, boilingPoint: 2519, density: 2.702,
+    oxidationStates: [3], discoveredBy: 'Hans Christian Ørsted',
+    discoveryYear: '1825', phase: 'Solid',
+    summary: 'Most abundant metal in Earth\'s crust. Lightweight, corrosion-'
+        'resistant, and infinitely recyclable. Ubiquitous in engineering.',
+  ),
+  ChemElement(
+    atomicNumber: 14, symbol: 'Si', name: 'Silicon', atomicMass: '28.086',
+    category: ElementCategory.metalloid, period: 3, group: 14,
+    tableRow: 3, tableCol: 14, block: 'p',
+    electronConfig: '[Ne] 3s² 3p²', electronegativity: 1.90,
+    meltingPoint: 1414, boilingPoint: 3265, density: 2.329,
+    oxidationStates: [-4, 4], discoveredBy: 'Jöns Jacob Berzelius',
+    discoveryYear: '1823', phase: 'Solid',
+    summary: 'Second most abundant element in Earth\'s crust. Foundation '
+        'of the modern semiconductor industry and computer chips.',
+  ),
+  ChemElement(
+    atomicNumber: 15, symbol: 'P', name: 'Phosphorus', atomicMass: '30.974',
+    category: ElementCategory.reactiveNonmetal, period: 3, group: 15,
+    tableRow: 3, tableCol: 15, block: 'p',
+    electronConfig: '[Ne] 3s² 3p³', electronegativity: 2.19,
+    meltingPoint: 44.15, boilingPoint: 280.5, density: 1.82,
+    oxidationStates: [-3, 3, 5], discoveredBy: 'Hennig Brand',
+    discoveryYear: '1669', phase: 'Solid',
+    summary: 'Essential for DNA, RNA, ATP, and bone mineral. '
+        'First element isolated by a known individual; discovered from urine.',
+  ),
+  ChemElement(
+    atomicNumber: 16, symbol: 'S', name: 'Sulfur', atomicMass: '32.065',
+    category: ElementCategory.reactiveNonmetal, period: 3, group: 16,
+    tableRow: 3, tableCol: 16, block: 'p',
+    electronConfig: '[Ne] 3s² 3p⁴', electronegativity: 2.58,
+    meltingPoint: 119.6, boilingPoint: 444.6, density: 2.067,
+    oxidationStates: [-2, 4, 6], discoveredBy: 'Ancient',
+    discoveryYear: 'Prehistoric', phase: 'Solid',
+    summary: 'Bright yellow non-metal known since antiquity. '
+        'Used in gunpowder, vulcanisation of rubber, and sulfuric acid production.',
+  ),
+  ChemElement(
+    atomicNumber: 17, symbol: 'Cl', name: 'Chlorine', atomicMass: '35.453',
+    category: ElementCategory.halogen, period: 3, group: 17,
+    tableRow: 3, tableCol: 17, block: 'p',
+    electronConfig: '[Ne] 3s² 3p⁵', electronegativity: 3.16,
+    meltingPoint: -101.5, boilingPoint: -34.04, density: 0.003214,
+    oxidationStates: [-1, 1, 3, 5, 7], discoveredBy: 'Carl Wilhelm Scheele',
+    discoveryYear: '1774', phase: 'Gas',
+    summary: 'Greenish-yellow toxic gas. Widely used in water purification, '
+        'PVC production, and as a disinfectant and bleaching agent.',
+  ),
+  ChemElement(
+    atomicNumber: 18, symbol: 'Ar', name: 'Argon', atomicMass: '39.948',
+    category: ElementCategory.nobleGas, period: 3, group: 18,
+    tableRow: 3, tableCol: 18, block: 'p',
+    electronConfig: '[Ne] 3s² 3p⁶', electronegativity: null,
+    meltingPoint: -189.36, boilingPoint: -185.85, density: 0.001784,
+    oxidationStates: [0], discoveredBy: 'Lord Rayleigh & William Ramsay',
+    discoveryYear: '1894', phase: 'Gas',
+    summary: 'Third most abundant gas in Earth\'s atmosphere (0.93%). '
+        'Used as an inert shielding gas in welding and metal production.',
+  ),
+
+  // ── Period 4 ─────────────────────────────────────────────────────────────────
+  ChemElement(
+    atomicNumber: 19, symbol: 'K', name: 'Potassium', atomicMass: '39.098',
+    category: ElementCategory.alkaliMetal, period: 4, group: 1,
+    tableRow: 4, tableCol: 1, block: 's',
+    electronConfig: '[Ar] 4s¹', electronegativity: 0.82,
+    meltingPoint: 63.38, boilingPoint: 759.0, density: 0.862,
+    oxidationStates: [1], discoveredBy: 'Humphry Davy',
+    discoveryYear: '1807', phase: 'Solid',
+    summary: 'Essential electrolyte for all living cells. '
+        'Regulates heartbeat and nerve signals; used in fertilisers.',
+  ),
+  ChemElement(
+    atomicNumber: 20, symbol: 'Ca', name: 'Calcium', atomicMass: '40.078',
+    category: ElementCategory.alkalineEarthMetal, period: 4, group: 2,
+    tableRow: 4, tableCol: 2, block: 's',
+    electronConfig: '[Ar] 4s²', electronegativity: 1.00,
+    meltingPoint: 842.0, boilingPoint: 1484, density: 1.55,
+    oxidationStates: [2], discoveredBy: 'Humphry Davy',
+    discoveryYear: '1808', phase: 'Solid',
+    summary: 'Fifth most abundant element in Earth\'s crust. '
+        'Main mineral in bones and teeth; essential in cell signalling.',
+  ),
+  ChemElement(
+    atomicNumber: 21, symbol: 'Sc', name: 'Scandium', atomicMass: '44.956',
+    category: ElementCategory.transitionMetal, period: 4, group: 3,
+    tableRow: 4, tableCol: 3, block: 'd',
+    electronConfig: '[Ar] 3d¹ 4s²', electronegativity: 1.36,
+    meltingPoint: 1541, boilingPoint: 2836, density: 2.989,
+    oxidationStates: [3], discoveredBy: 'Lars Fredrik Nilson',
+    discoveryYear: '1879', phase: 'Solid',
+    summary: 'Rare silvery-white metal predicted by Mendeleev. '
+        'Used in aluminium-scandium alloys for aerospace and sports equipment.',
+  ),
+  ChemElement(
+    atomicNumber: 22, symbol: 'Ti', name: 'Titanium', atomicMass: '47.867',
+    category: ElementCategory.transitionMetal, period: 4, group: 4,
+    tableRow: 4, tableCol: 4, block: 'd',
+    electronConfig: '[Ar] 3d² 4s²', electronegativity: 1.54,
+    meltingPoint: 1668, boilingPoint: 3287, density: 4.507,
+    oxidationStates: [2, 3, 4], discoveredBy: 'William Gregor',
+    discoveryYear: '1791', phase: 'Solid',
+    summary: 'Strong, low-density, corrosion-resistant metal. '
+        'Widely used in aerospace, medical implants, and as TiO₂ white pigment.',
+  ),
+  ChemElement(
+    atomicNumber: 23, symbol: 'V', name: 'Vanadium', atomicMass: '50.942',
+    category: ElementCategory.transitionMetal, period: 4, group: 5,
+    tableRow: 4, tableCol: 5, block: 'd',
+    electronConfig: '[Ar] 3d³ 4s²', electronegativity: 1.63,
+    meltingPoint: 1910, boilingPoint: 3407, density: 6.11,
+    oxidationStates: [2, 3, 4, 5], discoveredBy: 'Andrés Manuel del Río',
+    discoveryYear: '1801', phase: 'Solid',
+    summary: 'Hard, silvery-grey metal with excellent structural strength. '
+        'Primarily used as a steel additive and in vanadium redox flow batteries.',
+  ),
+  ChemElement(
+    atomicNumber: 24, symbol: 'Cr', name: 'Chromium', atomicMass: '51.996',
+    category: ElementCategory.transitionMetal, period: 4, group: 6,
+    tableRow: 4, tableCol: 6, block: 'd',
+    electronConfig: '[Ar] 3d⁵ 4s¹', electronegativity: 1.66,
+    meltingPoint: 1907, boilingPoint: 2671, density: 7.19,
+    oxidationStates: [2, 3, 6], discoveredBy: 'Louis Nicolas Vauquelin',
+    discoveryYear: '1797', phase: 'Solid',
+    summary: 'Lustrous, hard metal named for its colourful compounds. '
+        'Essential in stainless steel, chrome plating, and tanning leather.',
+  ),
+  ChemElement(
+    atomicNumber: 25, symbol: 'Mn', name: 'Manganese', atomicMass: '54.938',
+    category: ElementCategory.transitionMetal, period: 4, group: 7,
+    tableRow: 4, tableCol: 7, block: 'd',
+    electronConfig: '[Ar] 3d⁵ 4s²', electronegativity: 1.55,
+    meltingPoint: 1246, boilingPoint: 2061, density: 7.47,
+    oxidationStates: [2, 3, 4, 6, 7], discoveredBy: 'Johan Gottlieb Gahn',
+    discoveryYear: '1774', phase: 'Solid',
+    summary: 'Essential trace element and key steelmaking additive. '
+        'Permanganate is a common oxidising agent in organic chemistry.',
+  ),
+  ChemElement(
+    atomicNumber: 26, symbol: 'Fe', name: 'Iron', atomicMass: '55.845',
+    category: ElementCategory.transitionMetal, period: 4, group: 8,
+    tableRow: 4, tableCol: 8, block: 'd',
+    electronConfig: '[Ar] 3d⁶ 4s²', electronegativity: 1.83,
+    meltingPoint: 1538, boilingPoint: 2861, density: 7.874,
+    oxidationStates: [2, 3], discoveredBy: 'Ancient',
+    discoveryYear: 'Prehistoric', phase: 'Solid',
+    summary: 'Most used of all metals; backbone of civilisation. '
+        'Core of Earth\'s magnetic field; carrier of oxygen in blood via haem.',
+  ),
+  ChemElement(
+    atomicNumber: 27, symbol: 'Co', name: 'Cobalt', atomicMass: '58.933',
+    category: ElementCategory.transitionMetal, period: 4, group: 9,
+    tableRow: 4, tableCol: 9, block: 'd',
+    electronConfig: '[Ar] 3d⁷ 4s²', electronegativity: 1.88,
+    meltingPoint: 1495, boilingPoint: 2927, density: 8.90,
+    oxidationStates: [2, 3], discoveredBy: 'Georg Brandt',
+    discoveryYear: '1735', phase: 'Solid',
+    summary: 'Hard ferromagnetic metal. Used in lithium-ion batteries, '
+        'superalloys, permanent magnets, and as a blue pigment (cobalt blue).',
+  ),
+  ChemElement(
+    atomicNumber: 28, symbol: 'Ni', name: 'Nickel', atomicMass: '58.693',
+    category: ElementCategory.transitionMetal, period: 4, group: 10,
+    tableRow: 4, tableCol: 10, block: 'd',
+    electronConfig: '[Ar] 3d⁸ 4s²', electronegativity: 1.91,
+    meltingPoint: 1455, boilingPoint: 2913, density: 8.908,
+    oxidationStates: [2, 3], discoveredBy: 'Axel Fredrik Cronstedt',
+    discoveryYear: '1751', phase: 'Solid',
+    summary: 'Corrosion-resistant metal. Used in stainless steel, batteries, '
+        'coins, and as Raney nickel catalyst in hydrogenation reactions.',
+  ),
+  ChemElement(
+    atomicNumber: 29, symbol: 'Cu', name: 'Copper', atomicMass: '63.546',
+    category: ElementCategory.transitionMetal, period: 4, group: 11,
+    tableRow: 4, tableCol: 11, block: 'd',
+    electronConfig: '[Ar] 3d¹⁰ 4s¹', electronegativity: 1.90,
+    meltingPoint: 1084.6, boilingPoint: 2562, density: 8.960,
+    oxidationStates: [1, 2], discoveredBy: 'Ancient',
+    discoveryYear: 'Prehistoric', phase: 'Solid',
+    summary: 'Excellent electrical and thermal conductor. '
+        'First metal used by humans; essential in wiring, plumbing, and electronics.',
+  ),
+  ChemElement(
+    atomicNumber: 30, symbol: 'Zn', name: 'Zinc', atomicMass: '65.38',
+    category: ElementCategory.transitionMetal, period: 4, group: 12,
+    tableRow: 4, tableCol: 12, block: 'd',
+    electronConfig: '[Ar] 3d¹⁰ 4s²', electronegativity: 1.65,
+    meltingPoint: 419.53, boilingPoint: 907.0, density: 7.134,
+    oxidationStates: [2], discoveredBy: 'Andreas Sigismund Marggraf',
+    discoveryYear: '1746', phase: 'Solid',
+    summary: 'Essential micronutrient and galvanising metal. '
+        'Used to coat iron/steel against corrosion; part of brass alloy.',
+  ),
+  ChemElement(
+    atomicNumber: 31, symbol: 'Ga', name: 'Gallium', atomicMass: '69.723',
+    category: ElementCategory.postTransitionMetal, period: 4, group: 13,
+    tableRow: 4, tableCol: 13, block: 'p',
+    electronConfig: '[Ar] 3d¹⁰ 4s² 4p¹', electronegativity: 1.81,
+    meltingPoint: 29.76, boilingPoint: 2204, density: 5.91,
+    oxidationStates: [3], discoveredBy: 'Paul Emile Lecoq de Boisbaudran',
+    discoveryYear: '1875', phase: 'Solid',
+    summary: 'Melts just above room temperature; famously melts in the hand. '
+        'Used in semiconductors (GaAs), LEDs, and solar cells.',
+  ),
+  ChemElement(
+    atomicNumber: 32, symbol: 'Ge', name: 'Germanium', atomicMass: '72.630',
+    category: ElementCategory.metalloid, period: 4, group: 14,
+    tableRow: 4, tableCol: 14, block: 'p',
+    electronConfig: '[Ar] 3d¹⁰ 4s² 4p²', electronegativity: 2.01,
+    meltingPoint: 938.25, boilingPoint: 2833, density: 5.323,
+    oxidationStates: [2, 4], discoveredBy: 'Clemens Winkler',
+    discoveryYear: '1886', phase: 'Solid',
+    summary: 'Predicted by Mendeleev as "eka-silicon". '
+        'Used in fibre optics, infrared optics, and early transistors.',
+  ),
+  ChemElement(
+    atomicNumber: 33, symbol: 'As', name: 'Arsenic', atomicMass: '74.922',
+    category: ElementCategory.metalloid, period: 4, group: 15,
+    tableRow: 4, tableCol: 15, block: 'p',
+    electronConfig: '[Ar] 3d¹⁰ 4s² 4p³', electronegativity: 2.18,
+    meltingPoint: 817.0, boilingPoint: 614.0, density: 5.727,
+    oxidationStates: [-3, 3, 5], discoveredBy: 'Albertus Magnus',
+    discoveryYear: '1250', phase: 'Solid',
+    summary: 'Toxic metalloid infamous as a poison throughout history. '
+        'Used in semiconductor alloys, pesticides, and wood preservatives.',
+  ),
+  ChemElement(
+    atomicNumber: 34, symbol: 'Se', name: 'Selenium', atomicMass: '78.971',
+    category: ElementCategory.reactiveNonmetal, period: 4, group: 16,
+    tableRow: 4, tableCol: 16, block: 'p',
+    electronConfig: '[Ar] 3d¹⁰ 4s² 4p⁴', electronegativity: 2.55,
+    meltingPoint: 220.8, boilingPoint: 685.0, density: 4.809,
+    oxidationStates: [-2, 4, 6], discoveredBy: 'Jöns Jacob Berzelius',
+    discoveryYear: '1817', phase: 'Solid',
+    summary: 'Essential trace element with semiconductor properties. '
+        'Used in solar cells, photocopiers, and as a nutritional supplement.',
+  ),
+  ChemElement(
+    atomicNumber: 35, symbol: 'Br', name: 'Bromine', atomicMass: '79.904',
+    category: ElementCategory.halogen, period: 4, group: 17,
+    tableRow: 4, tableCol: 17, block: 'p',
+    electronConfig: '[Ar] 3d¹⁰ 4s² 4p⁵', electronegativity: 2.96,
+    meltingPoint: -7.3, boilingPoint: 59.0, density: 3.122,
+    oxidationStates: [-1, 1, 3, 5], discoveredBy: 'Antoine Balard',
+    discoveryYear: '1825', phase: 'Liquid',
+    summary: 'One of only two liquid elements at room temperature. '
+        'Used in flame retardants, photographic film, and pharmaceuticals.',
+  ),
+  ChemElement(
+    atomicNumber: 36, symbol: 'Kr', name: 'Krypton', atomicMass: '83.798',
+    category: ElementCategory.nobleGas, period: 4, group: 18,
+    tableRow: 4, tableCol: 18, block: 'p',
+    electronConfig: '[Ar] 3d¹⁰ 4s² 4p⁶', electronegativity: null,
+    meltingPoint: -157.36, boilingPoint: -153.22, density: 0.003749,
+    oxidationStates: [0], discoveredBy: 'William Ramsay & Morris Travers',
+    discoveryYear: '1898', phase: 'Gas',
+    summary: 'Dense noble gas used in high-performance light bulbs and '
+        'lasers. Once used to define the SI metre via spectral line.',
+  ),
+
+  // ── Period 5 ─────────────────────────────────────────────────────────────────
+  ChemElement(
+    atomicNumber: 37, symbol: 'Rb', name: 'Rubidium', atomicMass: '85.468',
+    category: ElementCategory.alkaliMetal, period: 5, group: 1,
+    tableRow: 5, tableCol: 1, block: 's',
+    electronConfig: '[Kr] 5s¹', electronegativity: 0.82,
+    meltingPoint: 39.31, boilingPoint: 688.0, density: 1.532,
+    oxidationStates: [1], discoveredBy: 'Robert Bunsen & Gustav Kirchhoff',
+    discoveryYear: '1861', phase: 'Solid',
+    summary: 'Soft, highly reactive alkali metal. '
+        'Used in atomic clocks, photoelectric cells, and research.',
+  ),
+  ChemElement(
+    atomicNumber: 38, symbol: 'Sr', name: 'Strontium', atomicMass: '87.62',
+    category: ElementCategory.alkalineEarthMetal, period: 5, group: 2,
+    tableRow: 5, tableCol: 2, block: 's',
+    electronConfig: '[Kr] 5s²', electronegativity: 0.95,
+    meltingPoint: 777.0, boilingPoint: 1382, density: 2.64,
+    oxidationStates: [2], discoveredBy: 'Adair Crawford',
+    discoveryYear: '1790', phase: 'Solid',
+    summary: 'Produces brilliant red colour in fireworks and flares. '
+        'Radioactive ⁹⁰Sr is a dangerous nuclear fission product.',
+  ),
+  ChemElement(
+    atomicNumber: 39, symbol: 'Y', name: 'Yttrium', atomicMass: '88.906',
+    category: ElementCategory.transitionMetal, period: 5, group: 3,
+    tableRow: 5, tableCol: 3, block: 'd',
+    electronConfig: '[Kr] 4d¹ 5s²', electronegativity: 1.22,
+    meltingPoint: 1526, boilingPoint: 3336, density: 4.472,
+    oxidationStates: [3], discoveredBy: 'Johan Gadolin',
+    discoveryYear: '1794', phase: 'Solid',
+    summary: 'Used in YAG lasers, red phosphors in TVs, '
+        'and as a stabiliser for zirconia in ceramics.',
+  ),
+  ChemElement(
+    atomicNumber: 40, symbol: 'Zr', name: 'Zirconium', atomicMass: '91.224',
+    category: ElementCategory.transitionMetal, period: 5, group: 4,
+    tableRow: 5, tableCol: 4, block: 'd',
+    electronConfig: '[Kr] 4d² 5s²', electronegativity: 1.33,
+    meltingPoint: 1855, boilingPoint: 4409, density: 6.52,
+    oxidationStates: [4], discoveredBy: 'Martin Heinrich Klaproth',
+    discoveryYear: '1789', phase: 'Solid',
+    summary: 'Highly corrosion-resistant and nearly transparent to neutrons. '
+        'Used in nuclear reactor cladding and zirconia jewellery.',
+  ),
+  ChemElement(
+    atomicNumber: 41, symbol: 'Nb', name: 'Niobium', atomicMass: '92.906',
+    category: ElementCategory.transitionMetal, period: 5, group: 5,
+    tableRow: 5, tableCol: 5, block: 'd',
+    electronConfig: '[Kr] 4d⁴ 5s¹', electronegativity: 1.6,
+    meltingPoint: 2477, boilingPoint: 4744, density: 8.57,
+    oxidationStates: [3, 5], discoveredBy: 'Charles Hatchett',
+    discoveryYear: '1801', phase: 'Solid',
+    summary: 'Superconductor at low temperatures. '
+        'Used in superalloys for jet engines and in MRI magnet coils.',
+  ),
+  ChemElement(
+    atomicNumber: 42, symbol: 'Mo', name: 'Molybdenum', atomicMass: '95.96',
+    category: ElementCategory.transitionMetal, period: 5, group: 6,
+    tableRow: 5, tableCol: 6, block: 'd',
+    electronConfig: '[Kr] 4d⁵ 5s¹', electronegativity: 2.16,
+    meltingPoint: 2622, boilingPoint: 4639, density: 10.28,
+    oxidationStates: [4, 6], discoveredBy: 'Carl Wilhelm Scheele',
+    discoveryYear: '1778', phase: 'Solid',
+    summary: 'High melting point metal crucial for high-strength steels. '
+        'Essential cofactor in nitrogenase (nitrogen fixation enzymes).',
+  ),
+  ChemElement(
+    atomicNumber: 43, symbol: 'Tc', name: 'Technetium', atomicMass: '98',
+    category: ElementCategory.transitionMetal, period: 5, group: 7,
+    tableRow: 5, tableCol: 7, block: 'd',
+    electronConfig: '[Kr] 4d⁵ 5s²', electronegativity: 1.9,
+    meltingPoint: 2157, boilingPoint: 4265, density: 11.5,
+    oxidationStates: [4, 7], discoveredBy: 'Carlo Perrier & Emilio Segrè',
+    discoveryYear: '1937', phase: 'Solid',
+    summary: 'First artificially produced element; all isotopes are radioactive. '
+        '⁹⁹ᵐTc is the workhorse of nuclear medicine imaging.',
+  ),
+  ChemElement(
+    atomicNumber: 44, symbol: 'Ru', name: 'Ruthenium', atomicMass: '101.07',
+    category: ElementCategory.transitionMetal, period: 5, group: 8,
+    tableRow: 5, tableCol: 8, block: 'd',
+    electronConfig: '[Kr] 4d⁷ 5s¹', electronegativity: 2.2,
+    meltingPoint: 2333, boilingPoint: 4150, density: 12.37,
+    oxidationStates: [2, 3, 4], discoveredBy: 'Karl Ernst Claus',
+    discoveryYear: '1844', phase: 'Solid',
+    summary: 'Rare platinum-group metal and versatile catalyst. '
+        'Used in catalytic converters, electrical contacts, and chip resistors.',
+  ),
+  ChemElement(
+    atomicNumber: 45, symbol: 'Rh', name: 'Rhodium', atomicMass: '102.906',
+    category: ElementCategory.transitionMetal, period: 5, group: 9,
+    tableRow: 5, tableCol: 9, block: 'd',
+    electronConfig: '[Kr] 4d⁸ 5s¹', electronegativity: 2.28,
+    meltingPoint: 1964, boilingPoint: 3695, density: 12.41,
+    oxidationStates: [3], discoveredBy: 'William Hyde Wollaston',
+    discoveryYear: '1803', phase: 'Solid',
+    summary: 'One of the rarest and most expensive metals on Earth. '
+        'Critical catalyst in three-way catalytic converters for vehicles.',
+  ),
+  ChemElement(
+    atomicNumber: 46, symbol: 'Pd', name: 'Palladium', atomicMass: '106.42',
+    category: ElementCategory.transitionMetal, period: 5, group: 10,
+    tableRow: 5, tableCol: 10, block: 'd',
+    electronConfig: '[Kr] 4d¹⁰', electronegativity: 2.20,
+    meltingPoint: 1554.9, boilingPoint: 2963, density: 12.023,
+    oxidationStates: [2, 4], discoveredBy: 'William Hyde Wollaston',
+    discoveryYear: '1803', phase: 'Solid',
+    summary: 'Unique ability to absorb up to 900× its volume in hydrogen. '
+        'Key catalyst in Suzuki cross-coupling reactions in organic synthesis.',
+  ),
+  ChemElement(
+    atomicNumber: 47, symbol: 'Ag', name: 'Silver', atomicMass: '107.868',
+    category: ElementCategory.transitionMetal, period: 5, group: 11,
+    tableRow: 5, tableCol: 11, block: 'd',
+    electronConfig: '[Kr] 4d¹⁰ 5s¹', electronegativity: 1.93,
+    meltingPoint: 961.78, boilingPoint: 2162, density: 10.501,
+    oxidationStates: [1], discoveredBy: 'Ancient',
+    discoveryYear: 'Prehistoric', phase: 'Solid',
+    summary: 'Best electrical and thermal conductor of all metals. '
+        'Used in jewellery, photography, electronics, and antimicrobial coatings.',
+  ),
+  ChemElement(
+    atomicNumber: 48, symbol: 'Cd', name: 'Cadmium', atomicMass: '112.411',
+    category: ElementCategory.transitionMetal, period: 5, group: 12,
+    tableRow: 5, tableCol: 12, block: 'd',
+    electronConfig: '[Kr] 4d¹⁰ 5s²', electronegativity: 1.69,
+    meltingPoint: 321.07, boilingPoint: 767.0, density: 8.69,
+    oxidationStates: [2], discoveredBy: 'Friedrich Strohmeyer',
+    discoveryYear: '1817', phase: 'Solid',
+    summary: 'Toxic heavy metal primarily used in NiCd rechargeable batteries. '
+        'CdTe is an efficient solar cell semiconductor.',
+  ),
+  ChemElement(
+    atomicNumber: 49, symbol: 'In', name: 'Indium', atomicMass: '114.818',
+    category: ElementCategory.postTransitionMetal, period: 5, group: 13,
+    tableRow: 5, tableCol: 13, block: 'p',
+    electronConfig: '[Kr] 4d¹⁰ 5s² 5p¹', electronegativity: 1.78,
+    meltingPoint: 156.6, boilingPoint: 2072, density: 7.31,
+    oxidationStates: [3], discoveredBy: 'Ferdinand Reich & Hieronymous Richter',
+    discoveryYear: '1863', phase: 'Solid',
+    summary: 'Soft, silvery post-transition metal. '
+        'ITO (indium tin oxide) is the transparent conductor in LCD screens.',
+  ),
+  ChemElement(
+    atomicNumber: 50, symbol: 'Sn', name: 'Tin', atomicMass: '118.710',
+    category: ElementCategory.postTransitionMetal, period: 5, group: 14,
+    tableRow: 5, tableCol: 14, block: 'p',
+    electronConfig: '[Kr] 4d¹⁰ 5s² 5p²', electronegativity: 1.96,
+    meltingPoint: 231.93, boilingPoint: 2602, density: 7.265,
+    oxidationStates: [2, 4], discoveredBy: 'Ancient',
+    discoveryYear: 'Prehistoric', phase: 'Solid',
+    summary: 'Used since antiquity to make bronze (Cu-Sn alloy). '
+        'Used in soldering, tin plating of steel cans, and organotin chemistry.',
+  ),
+  ChemElement(
+    atomicNumber: 51, symbol: 'Sb', name: 'Antimony', atomicMass: '121.760',
+    category: ElementCategory.metalloid, period: 5, group: 15,
+    tableRow: 5, tableCol: 15, block: 'p',
+    electronConfig: '[Kr] 4d¹⁰ 5s² 5p³', electronegativity: 2.05,
+    meltingPoint: 630.63, boilingPoint: 1587, density: 6.697,
+    oxidationStates: [-3, 3, 5], discoveredBy: 'Ancient',
+    discoveryYear: 'Prehistoric', phase: 'Solid',
+    summary: 'Brittle metalloid used since antiquity as a cosmetic (kohl). '
+        'Primary use today is as a flame retardant in plastics.',
+  ),
+  ChemElement(
+    atomicNumber: 52, symbol: 'Te', name: 'Tellurium', atomicMass: '127.60',
+    category: ElementCategory.metalloid, period: 5, group: 16,
+    tableRow: 5, tableCol: 16, block: 'p',
+    electronConfig: '[Kr] 4d¹⁰ 5s² 5p⁴', electronegativity: 2.1,
+    meltingPoint: 449.51, boilingPoint: 988.0, density: 6.24,
+    oxidationStates: [-2, 4, 6], discoveredBy: 'Franz-Joseph Müller von Reichenstein',
+    discoveryYear: '1782', phase: 'Solid',
+    summary: 'Rare metalloid. Used in CdTe solar cells and phase-change memory. '
+        'Exposure causes long-lasting garlic breath.',
+  ),
+  ChemElement(
+    atomicNumber: 53, symbol: 'I', name: 'Iodine', atomicMass: '126.904',
+    category: ElementCategory.halogen, period: 5, group: 17,
+    tableRow: 5, tableCol: 17, block: 'p',
+    electronConfig: '[Kr] 4d¹⁰ 5s² 5p⁵', electronegativity: 2.66,
+    meltingPoint: 113.7, boilingPoint: 184.3, density: 4.933,
+    oxidationStates: [-1, 1, 5, 7], discoveredBy: 'Bernard Courtois',
+    discoveryYear: '1811', phase: 'Solid',
+    summary: 'Purple vapour halogen essential for thyroid hormone synthesis. '
+        'Used as antiseptic, in photography, and in organic synthesis.',
+  ),
+  ChemElement(
+    atomicNumber: 54, symbol: 'Xe', name: 'Xenon', atomicMass: '131.293',
+    category: ElementCategory.nobleGas, period: 5, group: 18,
+    tableRow: 5, tableCol: 18, block: 'p',
+    electronConfig: '[Kr] 4d¹⁰ 5s² 5p⁶', electronegativity: 2.6,
+    meltingPoint: -111.79, boilingPoint: -108.13, density: 0.005887,
+    oxidationStates: [0, 2, 4], discoveredBy: 'William Ramsay & Morris Travers',
+    discoveryYear: '1898', phase: 'Gas',
+    summary: 'Dense noble gas used in high-intensity arc lamps and ion propulsion. '
+        'First noble gas shown to form stable compounds (XeF₂, XeF₄).',
+  ),
+
+  // ── Period 6 ─────────────────────────────────────────────────────────────────
+  ChemElement(
+    atomicNumber: 55, symbol: 'Cs', name: 'Caesium', atomicMass: '132.905',
+    category: ElementCategory.alkaliMetal, period: 6, group: 1,
+    tableRow: 6, tableCol: 1, block: 's',
+    electronConfig: '[Xe] 6s¹', electronegativity: 0.79,
+    meltingPoint: 28.44, boilingPoint: 671.0, density: 1.873,
+    oxidationStates: [1], discoveredBy: 'Robert Bunsen & Gustav Kirchhoff',
+    discoveryYear: '1860', phase: 'Solid',
+    summary: 'Most electropositive element; melts near room temperature. '
+        'Caesium-133 defines the SI second via atomic clock transitions.',
+  ),
+  ChemElement(
+    atomicNumber: 56, symbol: 'Ba', name: 'Barium', atomicMass: '137.327',
+    category: ElementCategory.alkalineEarthMetal, period: 6, group: 2,
+    tableRow: 6, tableCol: 2, block: 's',
+    electronConfig: '[Xe] 6s²', electronegativity: 0.89,
+    meltingPoint: 727.0, boilingPoint: 1845, density: 3.51,
+    oxidationStates: [2], discoveredBy: 'Humphry Davy',
+    discoveryYear: '1808', phase: 'Solid',
+    summary: 'Dense reactive alkaline earth metal. '
+        'BaSO₄ suspension is used as a radio-opaque contrast agent in X-rays.',
+  ),
+  // La–Lu: lanthanide row (tableRow: 9)
+  ChemElement(
+    atomicNumber: 57, symbol: 'La', name: 'Lanthanum', atomicMass: '138.905',
+    category: ElementCategory.lanthanide, period: 6, group: 3,
+    tableRow: 9, tableCol: 4, block: 'f',
+    electronConfig: '[Xe] 5d¹ 6s²', electronegativity: 1.10,
+    meltingPoint: 920.0, boilingPoint: 3464, density: 6.145,
+    oxidationStates: [3], discoveredBy: 'Carl Gustaf Mosander',
+    discoveryYear: '1839', phase: 'Solid',
+    summary: 'Soft, malleable rare-earth metal. '
+        'Used in camera lenses, hydrogen storage alloys, and nickel-metal hydride batteries.',
+  ),
+  ChemElement(
+    atomicNumber: 58, symbol: 'Ce', name: 'Cerium', atomicMass: '140.116',
+    category: ElementCategory.lanthanide, period: 6, group: 4,
+    tableRow: 9, tableCol: 5, block: 'f',
+    electronConfig: '[Xe] 4f¹ 5d¹ 6s²', electronegativity: 1.12,
+    meltingPoint: 798.0, boilingPoint: 3443, density: 6.77,
+    oxidationStates: [3, 4], discoveredBy: 'Jöns Jacob Berzelius & Wilhelm Hisinger',
+    discoveryYear: '1803', phase: 'Solid',
+    summary: 'Most abundant lanthanide. CeO₂ is a key automotive catalyst; '
+        'Ce³⁺/Ce⁴⁺ couple is used in vanadium redox batteries.',
+  ),
+  ChemElement(
+    atomicNumber: 59, symbol: 'Pr', name: 'Praseodymium', atomicMass: '140.908',
+    category: ElementCategory.lanthanide, period: 6, group: 5,
+    tableRow: 9, tableCol: 6, block: 'f',
+    electronConfig: '[Xe] 4f³ 6s²', electronegativity: 1.13,
+    meltingPoint: 931.0, boilingPoint: 3520, density: 6.77,
+    oxidationStates: [3], discoveredBy: 'Carl Auer von Welsbach',
+    discoveryYear: '1885', phase: 'Solid',
+    summary: 'Soft green rare-earth metal. '
+        'Used in strong permanent magnets (NdFeB alloy) and didymium glass for welders.',
+  ),
+  ChemElement(
+    atomicNumber: 60, symbol: 'Nd', name: 'Neodymium', atomicMass: '144.242',
+    category: ElementCategory.lanthanide, period: 6, group: 6,
+    tableRow: 9, tableCol: 7, block: 'f',
+    electronConfig: '[Xe] 4f⁴ 6s²', electronegativity: 1.14,
+    meltingPoint: 1024, boilingPoint: 3074, density: 7.01,
+    oxidationStates: [3], discoveredBy: 'Carl Auer von Welsbach',
+    discoveryYear: '1885', phase: 'Solid',
+    summary: 'Key component of Nd₂Fe₁₄B — the strongest permanent magnets known. '
+        'Essential for electric motors, wind turbines, and hard disk drives.',
+  ),
+  ChemElement(
+    atomicNumber: 61, symbol: 'Pm', name: 'Promethium', atomicMass: '145',
+    category: ElementCategory.lanthanide, period: 6, group: 7,
+    tableRow: 9, tableCol: 8, block: 'f',
+    electronConfig: '[Xe] 4f⁵ 6s²', electronegativity: 1.13,
+    meltingPoint: 1042, boilingPoint: 3000, density: 7.26,
+    oxidationStates: [3], discoveredBy: 'Marinsky, Glendenin & Coryell',
+    discoveryYear: '1945', phase: 'Solid',
+    summary: 'Radioactive lanthanide with no stable isotopes. '
+        'Used in atomic batteries for pacemakers and spacecraft.',
+  ),
+  ChemElement(
+    atomicNumber: 62, symbol: 'Sm', name: 'Samarium', atomicMass: '150.36',
+    category: ElementCategory.lanthanide, period: 6, group: 8,
+    tableRow: 9, tableCol: 9, block: 'f',
+    electronConfig: '[Xe] 4f⁶ 6s²', electronegativity: 1.17,
+    meltingPoint: 1072, boilingPoint: 1794, density: 7.52,
+    oxidationStates: [2, 3], discoveredBy: 'Paul Emile Lecoq de Boisbaudran',
+    discoveryYear: '1879', phase: 'Solid',
+    summary: 'SmCo magnets retain magnetism at high temperatures. '
+        'Important neutron absorber in nuclear reactor control rods.',
+  ),
+  ChemElement(
+    atomicNumber: 63, symbol: 'Eu', name: 'Europium', atomicMass: '151.964',
+    category: ElementCategory.lanthanide, period: 6, group: 9,
+    tableRow: 9, tableCol: 10, block: 'f',
+    electronConfig: '[Xe] 4f⁷ 6s²', electronegativity: 1.2,
+    meltingPoint: 826.0, boilingPoint: 1529, density: 5.244,
+    oxidationStates: [2, 3], discoveredBy: 'Eugène-Anatole Demarçay',
+    discoveryYear: '1901', phase: 'Solid',
+    summary: 'Softest lanthanide. Europium phosphors produce the red colour '
+        'in CRT and fluorescent screens; used as euro banknote anti-counterfeiting.',
+  ),
+  ChemElement(
+    atomicNumber: 64, symbol: 'Gd', name: 'Gadolinium', atomicMass: '157.25',
+    category: ElementCategory.lanthanide, period: 6, group: 10,
+    tableRow: 9, tableCol: 11, block: 'f',
+    electronConfig: '[Xe] 4f⁷ 5d¹ 6s²', electronegativity: 1.20,
+    meltingPoint: 1312, boilingPoint: 3250, density: 7.90,
+    oxidationStates: [3], discoveredBy: 'Jean Charles Galissard de Marignac',
+    discoveryYear: '1880', phase: 'Solid',
+    summary: 'Gadolinium chelates are the most common MRI contrast agents. '
+        'Highest neutron capture cross-section of any stable nuclide.',
+  ),
+  ChemElement(
+    atomicNumber: 65, symbol: 'Tb', name: 'Terbium', atomicMass: '158.925',
+    category: ElementCategory.lanthanide, period: 6, group: 11,
+    tableRow: 9, tableCol: 12, block: 'f',
+    electronConfig: '[Xe] 4f⁹ 6s²', electronegativity: 1.10,
+    meltingPoint: 1356, boilingPoint: 3230, density: 8.23,
+    oxidationStates: [3], discoveredBy: 'Carl Gustaf Mosander',
+    discoveryYear: '1843', phase: 'Solid',
+    summary: 'Produces green phosphorescence in fluorescent lamps and LEDs. '
+        'Used in magneto-optical recording and sonar systems (Terfenol-D).',
+  ),
+  ChemElement(
+    atomicNumber: 66, symbol: 'Dy', name: 'Dysprosium', atomicMass: '162.500',
+    category: ElementCategory.lanthanide, period: 6, group: 12,
+    tableRow: 9, tableCol: 13, block: 'f',
+    electronConfig: '[Xe] 4f¹⁰ 6s²', electronegativity: 1.22,
+    meltingPoint: 1407, boilingPoint: 2567, density: 8.551,
+    oxidationStates: [3], discoveredBy: 'Paul Emile Lecoq de Boisbaudran',
+    discoveryYear: '1886', phase: 'Solid',
+    summary: 'Added to NdFeB magnets to maintain performance at high temperature. '
+        'Critical for electric vehicle motors and wind turbine generators.',
+  ),
+  ChemElement(
+    atomicNumber: 67, symbol: 'Ho', name: 'Holmium', atomicMass: '164.930',
+    category: ElementCategory.lanthanide, period: 6, group: 13,
+    tableRow: 9, tableCol: 14, block: 'f',
+    electronConfig: '[Xe] 4f¹¹ 6s²', electronegativity: 1.23,
+    meltingPoint: 1461, boilingPoint: 2720, density: 8.795,
+    oxidationStates: [3], discoveredBy: 'Jacques-Louis Soret',
+    discoveryYear: '1878', phase: 'Solid',
+    summary: 'Highest magnetic moment of any element. '
+        'Used in yttrium-iron-garnet and YAG lasers and as a calibration standard.',
+  ),
+  ChemElement(
+    atomicNumber: 68, symbol: 'Er', name: 'Erbium', atomicMass: '167.259',
+    category: ElementCategory.lanthanide, period: 6, group: 14,
+    tableRow: 9, tableCol: 15, block: 'f',
+    electronConfig: '[Xe] 4f¹² 6s²', electronegativity: 1.24,
+    meltingPoint: 1529, boilingPoint: 2868, density: 9.066,
+    oxidationStates: [3], discoveredBy: 'Carl Gustaf Mosander',
+    discoveryYear: '1843', phase: 'Solid',
+    summary: 'Er³⁺ is the active ion in erbium-doped fibre amplifiers (EDFA), '
+        'which are essential for long-distance optical fibre communications.',
+  ),
+  ChemElement(
+    atomicNumber: 69, symbol: 'Tm', name: 'Thulium', atomicMass: '168.934',
+    category: ElementCategory.lanthanide, period: 6, group: 15,
+    tableRow: 9, tableCol: 16, block: 'f',
+    electronConfig: '[Xe] 4f¹³ 6s²', electronegativity: 1.25,
+    meltingPoint: 1545, boilingPoint: 1950, density: 9.321,
+    oxidationStates: [3], discoveredBy: 'Per Teodor Cleve',
+    discoveryYear: '1879', phase: 'Solid',
+    summary: 'Rarest naturally occurring lanthanide. '
+        'Radioactive ¹⁷⁰Tm is used in portable X-ray devices.',
+  ),
+  ChemElement(
+    atomicNumber: 70, symbol: 'Yb', name: 'Ytterbium', atomicMass: '173.045',
+    category: ElementCategory.lanthanide, period: 6, group: 16,
+    tableRow: 9, tableCol: 17, block: 'f',
+    electronConfig: '[Xe] 4f¹⁴ 6s²', electronegativity: 1.1,
+    meltingPoint: 824.0, boilingPoint: 1196, density: 6.965,
+    oxidationStates: [2, 3], discoveredBy: 'Jean Charles Galissard de Marignac',
+    discoveryYear: '1878', phase: 'Solid',
+    summary: 'Used in fibre lasers and as a dopant in stainless steel. '
+        'Yb optical lattice clocks are among the most accurate timekeepers.',
+  ),
+  ChemElement(
+    atomicNumber: 71, symbol: 'Lu', name: 'Lutetium', atomicMass: '174.967',
+    category: ElementCategory.lanthanide, period: 6, group: 17,
+    tableRow: 9, tableCol: 18, block: 'f',
+    electronConfig: '[Xe] 4f¹⁴ 5d¹ 6s²', electronegativity: 1.27,
+    meltingPoint: 1663, boilingPoint: 3402, density: 9.841,
+    oxidationStates: [3], discoveredBy: 'Georges Urbain',
+    discoveryYear: '1907', phase: 'Solid',
+    summary: 'Densest and hardest lanthanide. '
+        '¹⁷⁷Lu is a promising radionuclide for targeted cancer radiotherapy.',
+  ),
+  ChemElement(
+    atomicNumber: 72, symbol: 'Hf', name: 'Hafnium', atomicMass: '178.49',
+    category: ElementCategory.transitionMetal, period: 6, group: 4,
+    tableRow: 6, tableCol: 4, block: 'd',
+    electronConfig: '[Xe] 4f¹⁴ 5d² 6s²', electronegativity: 1.3,
+    meltingPoint: 2233, boilingPoint: 4603, density: 13.31,
+    oxidationStates: [4], discoveredBy: 'Dirk Coster & George de Hevesy',
+    discoveryYear: '1923', phase: 'Solid',
+    summary: 'Last stable element predicted but unknown before discovery. '
+        'Excellent neutron absorber; used in nuclear reactor control rods.',
+  ),
+  ChemElement(
+    atomicNumber: 73, symbol: 'Ta', name: 'Tantalum', atomicMass: '180.948',
+    category: ElementCategory.transitionMetal, period: 6, group: 5,
+    tableRow: 6, tableCol: 5, block: 'd',
+    electronConfig: '[Xe] 4f¹⁴ 5d³ 6s²', electronegativity: 1.5,
+    meltingPoint: 3017, boilingPoint: 5458, density: 16.69,
+    oxidationStates: [5], discoveredBy: 'Anders Gustaf Ekeberg',
+    discoveryYear: '1802', phase: 'Solid',
+    summary: 'Highly corrosion-resistant refractory metal. '
+        'Tantalum capacitors are in virtually every mobile phone and computer.',
+  ),
+  ChemElement(
+    atomicNumber: 74, symbol: 'W', name: 'Tungsten', atomicMass: '183.84',
+    category: ElementCategory.transitionMetal, period: 6, group: 6,
+    tableRow: 6, tableCol: 6, block: 'd',
+    electronConfig: '[Xe] 4f¹⁴ 5d⁴ 6s²', electronegativity: 2.36,
+    meltingPoint: 3422, boilingPoint: 5555, density: 19.25,
+    oxidationStates: [4, 6], discoveredBy: 'Fausto and Juan José Elhuyar',
+    discoveryYear: '1783', phase: 'Solid',
+    summary: 'Highest melting point of any metal (3422 °C). '
+        'Used in light bulb filaments, cutting tools, and armour-piercing ammunition.',
+  ),
+  ChemElement(
+    atomicNumber: 75, symbol: 'Re', name: 'Rhenium', atomicMass: '186.207',
+    category: ElementCategory.transitionMetal, period: 6, group: 7,
+    tableRow: 6, tableCol: 7, block: 'd',
+    electronConfig: '[Xe] 4f¹⁴ 5d⁵ 6s²', electronegativity: 1.9,
+    meltingPoint: 3186, boilingPoint: 5596, density: 21.02,
+    oxidationStates: [4, 7], discoveredBy: 'Ida Noddack, Walter Noddack & Otto Berg',
+    discoveryYear: '1925', phase: 'Solid',
+    summary: 'Second highest melting point element. '
+        'Used in superalloys for jet engine turbine blades and in catalytic reforming.',
+  ),
+  ChemElement(
+    atomicNumber: 76, symbol: 'Os', name: 'Osmium', atomicMass: '190.23',
+    category: ElementCategory.transitionMetal, period: 6, group: 8,
+    tableRow: 6, tableCol: 8, block: 'd',
+    electronConfig: '[Xe] 4f¹⁴ 5d⁶ 6s²', electronegativity: 2.2,
+    meltingPoint: 3033, boilingPoint: 5012, density: 22.59,
+    oxidationStates: [3, 4], discoveredBy: 'Smithson Tennant',
+    discoveryYear: '1803', phase: 'Solid',
+    summary: 'Densest naturally occurring element (22.59 g/cm³). '
+        'OsO₄ is a powerful staining agent in electron microscopy.',
+  ),
+  ChemElement(
+    atomicNumber: 77, symbol: 'Ir', name: 'Iridium', atomicMass: '192.217',
+    category: ElementCategory.transitionMetal, period: 6, group: 9,
+    tableRow: 6, tableCol: 9, block: 'd',
+    electronConfig: '[Xe] 4f¹⁴ 5d⁷ 6s²', electronegativity: 2.2,
+    meltingPoint: 2446, boilingPoint: 4428, density: 22.56,
+    oxidationStates: [3, 4], discoveredBy: 'Smithson Tennant',
+    discoveryYear: '1803', phase: 'Solid',
+    summary: 'Most corrosion-resistant metal; second densest element. '
+        'The K-Pg boundary iridium anomaly is evidence for asteroid impact.',
+  ),
+  ChemElement(
+    atomicNumber: 78, symbol: 'Pt', name: 'Platinum', atomicMass: '195.084',
+    category: ElementCategory.transitionMetal, period: 6, group: 10,
+    tableRow: 6, tableCol: 10, block: 'd',
+    electronConfig: '[Xe] 4f¹⁴ 5d⁹ 6s¹', electronegativity: 2.28,
+    meltingPoint: 1768.3, boilingPoint: 3825, density: 21.45,
+    oxidationStates: [2, 4], discoveredBy: 'Antonio de Ulloa',
+    discoveryYear: '1735', phase: 'Solid',
+    summary: 'Precious metal with extraordinary catalytic activity. '
+        'Used in catalytic converters, fuel cells, jewellery, and chemotherapy (cisplatin).',
+  ),
+  ChemElement(
+    atomicNumber: 79, symbol: 'Au', name: 'Gold', atomicMass: '196.967',
+    category: ElementCategory.transitionMetal, period: 6, group: 11,
+    tableRow: 6, tableCol: 11, block: 'd',
+    electronConfig: '[Xe] 4f¹⁴ 5d¹⁰ 6s¹', electronegativity: 2.54,
+    meltingPoint: 1064.2, boilingPoint: 2856, density: 19.32,
+    oxidationStates: [1, 3], discoveredBy: 'Ancient',
+    discoveryYear: 'Prehistoric', phase: 'Solid',
+    summary: 'Chemically inert, malleable precious metal. '
+        'Best electrical contact material; used in jewellery, electronics, and medicine.',
+  ),
+  ChemElement(
+    atomicNumber: 80, symbol: 'Hg', name: 'Mercury', atomicMass: '200.592',
+    category: ElementCategory.transitionMetal, period: 6, group: 12,
+    tableRow: 6, tableCol: 12, block: 'd',
+    electronConfig: '[Xe] 4f¹⁴ 5d¹⁰ 6s²', electronegativity: 2.00,
+    meltingPoint: -38.83, boilingPoint: 356.73, density: 13.534,
+    oxidationStates: [1, 2], discoveredBy: 'Ancient',
+    discoveryYear: 'Prehistoric', phase: 'Liquid',
+    summary: 'Only metal liquid at room temperature. '
+        'Highly toxic; used in thermometers, barometers, and fluorescent lamps.',
+  ),
+  ChemElement(
+    atomicNumber: 81, symbol: 'Tl', name: 'Thallium', atomicMass: '204.383',
+    category: ElementCategory.postTransitionMetal, period: 6, group: 13,
+    tableRow: 6, tableCol: 13, block: 'p',
+    electronConfig: '[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p¹', electronegativity: 1.62,
+    meltingPoint: 304.0, boilingPoint: 1473, density: 11.85,
+    oxidationStates: [1, 3], discoveredBy: 'William Crookes',
+    discoveryYear: '1861', phase: 'Solid',
+    summary: 'Toxic heavy metal once used as rat poison. '
+        'Thallium-201 is used in cardiac nuclear imaging (stress tests).',
+  ),
+  ChemElement(
+    atomicNumber: 82, symbol: 'Pb', name: 'Lead', atomicMass: '207.2',
+    category: ElementCategory.postTransitionMetal, period: 6, group: 14,
+    tableRow: 6, tableCol: 14, block: 'p',
+    electronConfig: '[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p²', electronegativity: 2.33,
+    meltingPoint: 327.46, boilingPoint: 1749, density: 11.34,
+    oxidationStates: [2, 4], discoveredBy: 'Ancient',
+    discoveryYear: 'Prehistoric', phase: 'Solid',
+    summary: 'Dense, malleable, and highly toxic heavy metal. '
+        'Used in lead-acid batteries, radiation shielding, and historically in plumbing.',
+  ),
+  ChemElement(
+    atomicNumber: 83, symbol: 'Bi', name: 'Bismuth', atomicMass: '208.980',
+    category: ElementCategory.postTransitionMetal, period: 6, group: 15,
+    tableRow: 6, tableCol: 15, block: 'p',
+    electronConfig: '[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p³', electronegativity: 2.02,
+    meltingPoint: 271.5, boilingPoint: 1564, density: 9.747,
+    oxidationStates: [3, 5], discoveredBy: 'Claude François Geoffroy',
+    discoveryYear: '1753', phase: 'Solid',
+    summary: 'Heaviest stable element; forms colourful iridescent crystals. '
+        'Replacement for toxic lead in pharmaceuticals (Pepto-Bismol) and shot.',
+  ),
+  ChemElement(
+    atomicNumber: 84, symbol: 'Po', name: 'Polonium', atomicMass: '209',
+    category: ElementCategory.postTransitionMetal, period: 6, group: 16,
+    tableRow: 6, tableCol: 16, block: 'p',
+    electronConfig: '[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁴', electronegativity: 2.0,
+    meltingPoint: 254.0, boilingPoint: 962.0, density: 9.196,
+    oxidationStates: [2, 4], discoveredBy: 'Marie & Pierre Curie',
+    discoveryYear: '1898', phase: 'Solid',
+    summary: 'Highly radioactive α-emitter; discovered by Marie Curie. '
+        'Used in anti-static devices and as a heat source in space probes.',
+  ),
+  ChemElement(
+    atomicNumber: 85, symbol: 'At', name: 'Astatine', atomicMass: '210',
+    category: ElementCategory.halogen, period: 6, group: 17,
+    tableRow: 6, tableCol: 17, block: 'p',
+    electronConfig: '[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁵', electronegativity: 2.2,
+    meltingPoint: 302.0, boilingPoint: 337.0, density: 7.0,
+    oxidationStates: [-1, 1, 5], discoveredBy: 'Corson, MacKenzie & Segrè',
+    discoveryYear: '1940', phase: 'Solid',
+    summary: 'Rarest naturally occurring element on Earth. '
+        '²¹¹At is a promising radionuclide for targeted alpha therapy of cancer.',
+  ),
+  ChemElement(
+    atomicNumber: 86, symbol: 'Rn', name: 'Radon', atomicMass: '222',
+    category: ElementCategory.nobleGas, period: 6, group: 18,
+    tableRow: 6, tableCol: 18, block: 'p',
+    electronConfig: '[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁶', electronegativity: null,
+    meltingPoint: -71.15, boilingPoint: -61.85, density: 0.00973,
+    oxidationStates: [0], discoveredBy: 'Friedrich Ernst Dorn',
+    discoveryYear: '1900', phase: 'Gas',
+    summary: 'Radioactive noble gas that seeps from uranium-bearing rocks. '
+        'Second leading cause of lung cancer after smoking.',
+  ),
+
+  // ── Period 7 ─────────────────────────────────────────────────────────────────
+  ChemElement(
+    atomicNumber: 87, symbol: 'Fr', name: 'Francium', atomicMass: '223',
+    category: ElementCategory.alkaliMetal, period: 7, group: 1,
+    tableRow: 7, tableCol: 1, block: 's',
+    electronConfig: '[Rn] 7s¹', electronegativity: 0.7,
+    meltingPoint: 27.0, boilingPoint: 677.0, density: 1.87,
+    oxidationStates: [1], discoveredBy: 'Marguerite Perey',
+    discoveryYear: '1939', phase: 'Solid',
+    summary: 'Rarest naturally occurring alkali metal; highly radioactive. '
+        'Most unstable of the first 101 elements; at most a few atoms exist at once.',
+  ),
+  ChemElement(
+    atomicNumber: 88, symbol: 'Ra', name: 'Radium', atomicMass: '226',
+    category: ElementCategory.alkalineEarthMetal, period: 7, group: 2,
+    tableRow: 7, tableCol: 2, block: 's',
+    electronConfig: '[Rn] 7s²', electronegativity: 0.9,
+    meltingPoint: 700.0, boilingPoint: 1413, density: 5.5,
+    oxidationStates: [2], discoveredBy: 'Marie & Pierre Curie',
+    discoveryYear: '1898', phase: 'Solid',
+    summary: 'Intensely radioactive element discovered by Marie Curie. '
+        'Once used in luminous paint; now studied for cancer treatment.',
+  ),
+  // Ac–Lr: actinide row (tableRow: 10)
+  ChemElement(
+    atomicNumber: 89, symbol: 'Ac', name: 'Actinium', atomicMass: '227',
+    category: ElementCategory.actinide, period: 7, group: 3,
+    tableRow: 10, tableCol: 4, block: 'f',
+    electronConfig: '[Rn] 6d¹ 7s²', electronegativity: 1.1,
+    meltingPoint: 1050, boilingPoint: 3200, density: 10.07,
+    oxidationStates: [3], discoveredBy: 'André-Louis Debierne',
+    discoveryYear: '1899', phase: 'Solid',
+    summary: 'Silvery radioactive metal that glows blue in the dark due to ionising radiation. '
+        'Gives its name to the actinide series.',
+  ),
+  ChemElement(
+    atomicNumber: 90, symbol: 'Th', name: 'Thorium', atomicMass: '232.038',
+    category: ElementCategory.actinide, period: 7, group: 4,
+    tableRow: 10, tableCol: 5, block: 'f',
+    electronConfig: '[Rn] 6d² 7s²', electronegativity: 1.3,
+    meltingPoint: 1750, boilingPoint: 4788, density: 11.72,
+    oxidationStates: [4], discoveredBy: 'Jöns Jacob Berzelius',
+    discoveryYear: '1829', phase: 'Solid',
+    summary: 'Fertile nuclear fuel; abundant alternative to uranium. '
+        'Formerly used in gas-mantle lantern mantles.',
+  ),
+  ChemElement(
+    atomicNumber: 91, symbol: 'Pa', name: 'Protactinium', atomicMass: '231.036',
+    category: ElementCategory.actinide, period: 7, group: 5,
+    tableRow: 10, tableCol: 6, block: 'f',
+    electronConfig: '[Rn] 5f² 6d¹ 7s²', electronegativity: 1.5,
+    meltingPoint: 1572, boilingPoint: 4000, density: 15.37,
+    oxidationStates: [4, 5], discoveredBy: 'Otto Hahn & Lise Meitner',
+    discoveryYear: '1913', phase: 'Solid',
+    summary: 'Rare, toxic, and radioactive actinide. '
+        'All known isotopes are radioactive; used in Pa-U ocean circulation dating.',
+  ),
+  ChemElement(
+    atomicNumber: 92, symbol: 'U', name: 'Uranium', atomicMass: '238.029',
+    category: ElementCategory.actinide, period: 7, group: 6,
+    tableRow: 10, tableCol: 7, block: 'f',
+    electronConfig: '[Rn] 5f³ 6d¹ 7s²', electronegativity: 1.38,
+    meltingPoint: 1135, boilingPoint: 4131, density: 19.05,
+    oxidationStates: [3, 4, 5, 6], discoveredBy: 'Martin Heinrich Klaproth',
+    discoveryYear: '1789', phase: 'Solid',
+    summary: 'Dense fissile element and primary nuclear fuel. '
+        '²³⁵U sustains nuclear chain reactions; depleted U used in armour penetrators.',
+  ),
+  ChemElement(
+    atomicNumber: 93, symbol: 'Np', name: 'Neptunium', atomicMass: '237',
+    category: ElementCategory.actinide, period: 7, group: 7,
+    tableRow: 10, tableCol: 8, block: 'f',
+    electronConfig: '[Rn] 5f⁴ 6d¹ 7s²', electronegativity: 1.36,
+    meltingPoint: 644.0, boilingPoint: 4000, density: 20.45,
+    oxidationStates: [3, 4, 5, 6], discoveredBy: 'Edwin McMillan & Philip Abelson',
+    discoveryYear: '1940', phase: 'Solid',
+    summary: 'First transuranium element produced synthetically. '
+        '²³⁷Np is a by-product of nuclear reactors; used in neutron detectors.',
+  ),
+  ChemElement(
+    atomicNumber: 94, symbol: 'Pu', name: 'Plutonium', atomicMass: '244',
+    category: ElementCategory.actinide, period: 7, group: 8,
+    tableRow: 10, tableCol: 9, block: 'f',
+    electronConfig: '[Rn] 5f⁶ 7s²', electronegativity: 1.28,
+    meltingPoint: 640.0, boilingPoint: 3228, density: 19.84,
+    oxidationStates: [3, 4, 5, 6], discoveredBy: 'Glenn T. Seaborg et al.',
+    discoveryYear: '1940', phase: 'Solid',
+    summary: '²³⁹Pu is the fissile material in nuclear weapons and fast reactors. '
+        '²³⁸Pu powers the RTGs in deep-space probes like Voyager and Cassini.',
+  ),
+  ChemElement(
+    atomicNumber: 95, symbol: 'Am', name: 'Americium', atomicMass: '243',
+    category: ElementCategory.actinide, period: 7, group: 9,
+    tableRow: 10, tableCol: 10, block: 'f',
+    electronConfig: '[Rn] 5f⁷ 7s²', electronegativity: 1.13,
+    meltingPoint: 1176, boilingPoint: 2607, density: 13.67,
+    oxidationStates: [3], discoveredBy: 'Glenn T. Seaborg et al.',
+    discoveryYear: '1944', phase: 'Solid',
+    summary: '²⁴¹Am is the radioactive source in virtually every smoke detector, '
+        'ionising a small air gap to sense combustion particles.',
+  ),
+  ChemElement(
+    atomicNumber: 96, symbol: 'Cm', name: 'Curium', atomicMass: '247',
+    category: ElementCategory.actinide, period: 7, group: 10,
+    tableRow: 10, tableCol: 11, block: 'f',
+    electronConfig: '[Rn] 5f⁷ 6d¹ 7s²', electronegativity: 1.28,
+    meltingPoint: 1340, boilingPoint: 3110, density: 13.51,
+    oxidationStates: [3], discoveredBy: 'Glenn T. Seaborg et al.',
+    discoveryYear: '1944', phase: 'Solid',
+    summary: 'Named for Marie and Pierre Curie. '
+        'Alpha source used in alpha particle X-ray spectrometers on Mars rovers.',
+  ),
+  ChemElement(
+    atomicNumber: 97, symbol: 'Bk', name: 'Berkelium', atomicMass: '247',
+    category: ElementCategory.actinide, period: 7, group: 11,
+    tableRow: 10, tableCol: 12, block: 'f',
+    electronConfig: '[Rn] 5f⁹ 7s²', electronegativity: 1.3,
+    meltingPoint: 986.0, boilingPoint: null, density: 14.78,
+    oxidationStates: [3, 4], discoveredBy: 'Glenn T. Seaborg et al.',
+    discoveryYear: '1949', phase: 'Solid',
+    summary: 'Radioactive transuranic element named after Berkeley, California. '
+        'Has no commercial applications; produced only in microgram quantities.',
+  ),
+  ChemElement(
+    atomicNumber: 98, symbol: 'Cf', name: 'Californium', atomicMass: '251',
+    category: ElementCategory.actinide, period: 7, group: 12,
+    tableRow: 10, tableCol: 13, block: 'f',
+    electronConfig: '[Rn] 5f¹⁰ 7s²', electronegativity: 1.3,
+    meltingPoint: 900.0, boilingPoint: null, density: 15.1,
+    oxidationStates: [3], discoveredBy: 'Glenn T. Seaborg et al.',
+    discoveryYear: '1950', phase: 'Solid',
+    summary: '²⁵²Cf is a powerful neutron source used in cancer brachytherapy, '
+        'oil well logging, and nuclear reactor start-up.',
+  ),
+  ChemElement(
+    atomicNumber: 99, symbol: 'Es', name: 'Einsteinium', atomicMass: '252',
+    category: ElementCategory.actinide, period: 7, group: 13,
+    tableRow: 10, tableCol: 14, block: 'f',
+    electronConfig: '[Rn] 5f¹¹ 7s²', electronegativity: 1.3,
+    meltingPoint: 860.0, boilingPoint: null, density: 8.84,
+    oxidationStates: [3], discoveredBy: 'Albert Ghiorso et al.',
+    discoveryYear: '1952', phase: 'Solid',
+    summary: 'Discovered in the fallout of the first hydrogen bomb test. '
+        'Named after Albert Einstein; studied only in nanogram quantities.',
+  ),
+  ChemElement(
+    atomicNumber: 100, symbol: 'Fm', name: 'Fermium', atomicMass: '257',
+    category: ElementCategory.actinide, period: 7, group: 14,
+    tableRow: 10, tableCol: 15, block: 'f',
+    electronConfig: '[Rn] 5f¹² 7s²', electronegativity: 1.3,
+    meltingPoint: 1527, boilingPoint: null, density: null,
+    oxidationStates: [3], discoveredBy: 'Albert Ghiorso et al.',
+    discoveryYear: '1952', phase: 'Solid',
+    summary: 'Radioactive actinide named after Enrico Fermi. '
+        'Heaviest element that can be produced in macroscopic quantities via neutron capture.',
+  ),
+  ChemElement(
+    atomicNumber: 101, symbol: 'Md', name: 'Mendelevium', atomicMass: '258',
+    category: ElementCategory.actinide, period: 7, group: 15,
+    tableRow: 10, tableCol: 16, block: 'f',
+    electronConfig: '[Rn] 5f¹³ 7s²', electronegativity: 1.3,
+    meltingPoint: 827.0, boilingPoint: null, density: null,
+    oxidationStates: [2, 3], discoveredBy: 'Albert Ghiorso et al.',
+    discoveryYear: '1955', phase: 'Solid',
+    summary: 'Named after Dmitri Mendeleev, creator of the periodic table. '
+        'First element produced one-atom-at-a-time using a particle accelerator.',
+  ),
+  ChemElement(
+    atomicNumber: 102, symbol: 'No', name: 'Nobelium', atomicMass: '259',
+    category: ElementCategory.actinide, period: 7, group: 16,
+    tableRow: 10, tableCol: 17, block: 'f',
+    electronConfig: '[Rn] 5f¹⁴ 7s²', electronegativity: 1.3,
+    meltingPoint: 827.0, boilingPoint: null, density: null,
+    oxidationStates: [2, 3], discoveredBy: 'Georgy Flerov et al. (Dubna)',
+    discoveryYear: '1966', phase: 'Solid',
+    summary: 'Named after Alfred Nobel. '
+        'Has an unusually stable +2 oxidation state due to a filled 5f subshell.',
+  ),
+  ChemElement(
+    atomicNumber: 103, symbol: 'Lr', name: 'Lawrencium', atomicMass: '266',
+    category: ElementCategory.actinide, period: 7, group: 17,
+    tableRow: 10, tableCol: 18, block: 'f',
+    electronConfig: '[Rn] 5f¹⁴ 7s² 7p¹', electronegativity: 1.3,
+    meltingPoint: 1627, boilingPoint: null, density: null,
+    oxidationStates: [3], discoveredBy: 'Albert Ghiorso et al.',
+    discoveryYear: '1961', phase: 'Solid',
+    summary: 'Last actinide and last member of the f-block. '
+        'Named after Ernest O. Lawrence, inventor of the cyclotron.',
+  ),
+  // ── d-block Period 7 (transactinides) ─────────────────────────────────────────
+  ChemElement(
+    atomicNumber: 104, symbol: 'Rf', name: 'Rutherfordium', atomicMass: '267',
+    category: ElementCategory.transitionMetal, period: 7, group: 4,
+    tableRow: 7, tableCol: 4, block: 'd',
+    electronConfig: '[Rn] 5f¹⁴ 6d² 7s²', electronegativity: null,
+    meltingPoint: 2100, boilingPoint: 5500, density: 23.2,
+    oxidationStates: [4], discoveredBy: 'Georgy Flerov et al. (Dubna)',
+    discoveryYear: '1964', phase: 'Solid',
+    summary: 'First transactinide element. '
+        'Named after Ernest Rutherford; chemical properties similar to hafnium.',
+  ),
+  ChemElement(
+    atomicNumber: 105, symbol: 'Db', name: 'Dubnium', atomicMass: '268',
+    category: ElementCategory.transitionMetal, period: 7, group: 5,
+    tableRow: 7, tableCol: 5, block: 'd',
+    electronConfig: '[Rn] 5f¹⁴ 6d³ 7s²', electronegativity: null,
+    meltingPoint: null, boilingPoint: null, density: 29.3,
+    oxidationStates: [5], discoveredBy: 'Georgy Flerov et al. (Dubna)',
+    discoveryYear: '1967', phase: 'Unknown',
+    summary: 'Named after Dubna, Russia. '
+        'Analogous to tantalum; produced in very small quantities in particle accelerators.',
+  ),
+  ChemElement(
+    atomicNumber: 106, symbol: 'Sg', name: 'Seaborgium', atomicMass: '269',
+    category: ElementCategory.transitionMetal, period: 7, group: 6,
+    tableRow: 7, tableCol: 6, block: 'd',
+    electronConfig: '[Rn] 5f¹⁴ 6d⁴ 7s²', electronegativity: null,
+    meltingPoint: null, boilingPoint: null, density: 35.0,
+    oxidationStates: [6], discoveredBy: 'Ghiorso et al. (Berkeley/Dubna)',
+    discoveryYear: '1974', phase: 'Unknown',
+    summary: 'Named after Glenn T. Seaborg, the chemist who synthesised most transuranic elements. '
+        'Behaves chemically like tungsten.',
+  ),
+  ChemElement(
+    atomicNumber: 107, symbol: 'Bh', name: 'Bohrium', atomicMass: '270',
+    category: ElementCategory.transitionMetal, period: 7, group: 7,
+    tableRow: 7, tableCol: 7, block: 'd',
+    electronConfig: '[Rn] 5f¹⁴ 6d⁵ 7s²', electronegativity: null,
+    meltingPoint: null, boilingPoint: null, density: 37.1,
+    oxidationStates: [7], discoveredBy: 'GSI Helmholtz Centre, Darmstadt',
+    discoveryYear: '1981', phase: 'Unknown',
+    summary: 'Named after Niels Bohr. '
+        'Only a few atoms have ever been synthesised; half-life of ~61 seconds.',
+  ),
+  ChemElement(
+    atomicNumber: 108, symbol: 'Hs', name: 'Hassium', atomicMass: '277',
+    category: ElementCategory.transitionMetal, period: 7, group: 8,
+    tableRow: 7, tableCol: 8, block: 'd',
+    electronConfig: '[Rn] 5f¹⁴ 6d⁶ 7s²', electronegativity: null,
+    meltingPoint: null, boilingPoint: null, density: 40.7,
+    oxidationStates: [8], discoveredBy: 'GSI Helmholtz Centre, Darmstadt',
+    discoveryYear: '1984', phase: 'Unknown',
+    summary: 'Named after Hesse (Hassia), Germany. '
+        'HsO₄ (hassium tetroxide) was successfully synthesised and characterised.',
+  ),
+  ChemElement(
+    atomicNumber: 109, symbol: 'Mt', name: 'Meitnerium', atomicMass: '278',
+    category: ElementCategory.unknownProperties, period: 7, group: 9,
+    tableRow: 7, tableCol: 9, block: 'd',
+    electronConfig: '[Rn] 5f¹⁴ 6d⁷ 7s²', electronegativity: null,
+    meltingPoint: null, boilingPoint: null, density: null,
+    oxidationStates: [3, 6], discoveredBy: 'GSI Helmholtz Centre, Darmstadt',
+    discoveryYear: '1982', phase: 'Unknown',
+    summary: 'Named after Lise Meitner, co-discoverer of nuclear fission. '
+        'Predicted to have iridium-like chemistry.',
+  ),
+  ChemElement(
+    atomicNumber: 110, symbol: 'Ds', name: 'Darmstadtium', atomicMass: '281',
+    category: ElementCategory.unknownProperties, period: 7, group: 10,
+    tableRow: 7, tableCol: 10, block: 'd',
+    electronConfig: '[Rn] 5f¹⁴ 6d⁸ 7s²', electronegativity: null,
+    meltingPoint: null, boilingPoint: null, density: null,
+    oxidationStates: [2, 4], discoveredBy: 'GSI Helmholtz Centre, Darmstadt',
+    discoveryYear: '1994', phase: 'Unknown',
+    summary: 'Named after Darmstadt, Germany. '
+        'Predicted to have platinum-like chemistry.',
+  ),
+  ChemElement(
+    atomicNumber: 111, symbol: 'Rg', name: 'Roentgenium', atomicMass: '282',
+    category: ElementCategory.unknownProperties, period: 7, group: 11,
+    tableRow: 7, tableCol: 11, block: 'd',
+    electronConfig: '[Rn] 5f¹⁴ 6d⁹ 7s²', electronegativity: null,
+    meltingPoint: null, boilingPoint: null, density: null,
+    oxidationStates: [3], discoveredBy: 'GSI Helmholtz Centre, Darmstadt',
+    discoveryYear: '1994', phase: 'Unknown',
+    summary: 'Named after Wilhelm Röntgen, discoverer of X-rays. '
+        'Predicted to behave unusually like gold in some chemical reactions.',
+  ),
+  ChemElement(
+    atomicNumber: 112, symbol: 'Cn', name: 'Copernicium', atomicMass: '285',
+    category: ElementCategory.transitionMetal, period: 7, group: 12,
+    tableRow: 7, tableCol: 12, block: 'd',
+    electronConfig: '[Rn] 5f¹⁴ 6d¹⁰ 7s²', electronegativity: null,
+    meltingPoint: null, boilingPoint: null, density: null,
+    oxidationStates: [2], discoveredBy: 'GSI Helmholtz Centre, Darmstadt',
+    discoveryYear: '1996', phase: 'Unknown',
+    summary: 'Named after Nicolaus Copernicus. '
+        'May be a gas at room temperature due to relativistic effects — unusual for a metal.',
+  ),
+  ChemElement(
+    atomicNumber: 113, symbol: 'Nh', name: 'Nihonium', atomicMass: '286',
+    category: ElementCategory.unknownProperties, period: 7, group: 13,
+    tableRow: 7, tableCol: 13, block: 'p',
+    electronConfig: '[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p¹', electronegativity: null,
+    meltingPoint: null, boilingPoint: null, density: null,
+    oxidationStates: [1, 3], discoveredBy: 'RIKEN, Japan',
+    discoveryYear: '2004', phase: 'Unknown',
+    summary: 'First element discovered in Asia; named after Japan (Nihon). '
+        'RIKEN team bombarded bismuth-209 with zinc-70 to produce it.',
+  ),
+  ChemElement(
+    atomicNumber: 114, symbol: 'Fl', name: 'Flerovium', atomicMass: '289',
+    category: ElementCategory.unknownProperties, period: 7, group: 14,
+    tableRow: 7, tableCol: 14, block: 'p',
+    electronConfig: '[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p²', electronegativity: null,
+    meltingPoint: null, boilingPoint: null, density: null,
+    oxidationStates: [2, 4], discoveredBy: 'JINR, Dubna',
+    discoveryYear: '1999', phase: 'Unknown',
+    summary: 'Named after the Flerov Laboratory of Nuclear Reactions. '
+        'Predicted to behave as a noble gas due to relativistic stabilisation.',
+  ),
+  ChemElement(
+    atomicNumber: 115, symbol: 'Mc', name: 'Moscovium', atomicMass: '290',
+    category: ElementCategory.unknownProperties, period: 7, group: 15,
+    tableRow: 7, tableCol: 15, block: 'p',
+    electronConfig: '[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p³', electronegativity: null,
+    meltingPoint: null, boilingPoint: null, density: null,
+    oxidationStates: [1, 3], discoveredBy: 'JINR Dubna & Oak Ridge',
+    discoveryYear: '2003', phase: 'Unknown',
+    summary: 'Named after Moscow Oblast. '
+        'Decays rapidly by alpha emission; analogous to bismuth.',
+  ),
+  ChemElement(
+    atomicNumber: 116, symbol: 'Lv', name: 'Livermorium', atomicMass: '293',
+    category: ElementCategory.unknownProperties, period: 7, group: 16,
+    tableRow: 7, tableCol: 16, block: 'p',
+    electronConfig: '[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁴', electronegativity: null,
+    meltingPoint: null, boilingPoint: null, density: null,
+    oxidationStates: [2, 4], discoveredBy: 'JINR Dubna & Lawrence Livermore',
+    discoveryYear: '2000', phase: 'Unknown',
+    summary: 'Named after Lawrence Livermore National Laboratory. '
+        'Only a few atoms have been synthesised; predicted to resemble polonium.',
+  ),
+  ChemElement(
+    atomicNumber: 117, symbol: 'Ts', name: 'Tennessine', atomicMass: '294',
+    category: ElementCategory.unknownProperties, period: 7, group: 17,
+    tableRow: 7, tableCol: 17, block: 'p',
+    electronConfig: '[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁵', electronegativity: null,
+    meltingPoint: null, boilingPoint: null, density: null,
+    oxidationStates: [-1, 1, 3, 5], discoveredBy: 'JINR Dubna, ORNL & Vanderbilt',
+    discoveryYear: '2010', phase: 'Unknown',
+    summary: 'Named after Tennessee, USA. '
+        'The heaviest halogen; predicted to be less reactive than lighter halogens.',
+  ),
+  ChemElement(
+    atomicNumber: 118, symbol: 'Og', name: 'Oganesson', atomicMass: '294',
+    category: ElementCategory.nobleGas, period: 7, group: 18,
+    tableRow: 7, tableCol: 18, block: 'p',
+    electronConfig: '[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁶', electronegativity: null,
+    meltingPoint: null, boilingPoint: null, density: null,
+    oxidationStates: [0, 2, 4], discoveredBy: 'JINR Dubna & Lawrence Livermore',
+    discoveryYear: '2002', phase: 'Unknown',
+    summary: 'Heaviest known element; named after physicist Yuri Oganessian. '
+        'May actually be a solid or liquid at room temperature despite being a "noble gas".',
+  ),
+];
